@@ -1,0 +1,12 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+<f:if condition="{characters}">
+    <f:then>
+        <span id="characters">{pvh:format.trim(content: content, characters: characters)}</span>
+    </f:then>
+    <f:else>
+        <span id="no-characters">{pvh:format.trim(content: content)}</span>
+    </f:else>
+</f:if>
+</html>
