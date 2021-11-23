@@ -24,7 +24,7 @@
         <testsuite name="buepro-pvh-functional-tests">
 <!--            <directory>../Tests/Functional</directory>-->
             <file>
-                ../Tests/Functional/ViewHelpers/Format/EliminateViewHelperTest.php
+                ../Tests/Functional/ViewHelpers/Format/ReplaceViewHelperTest.php
             </file>
         </testsuite>
     </testsuites>

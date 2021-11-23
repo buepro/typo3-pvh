@@ -38,3 +38,19 @@ Usage examples
 
    {content -> pvh:format.eliminate(whitespace: true)}
    {pvh:format.eliminate(content: someContent, whitespace: true)}
+
+Replace
+---------
+
+Description
+~~~~~~~~~~~
+
+`See vhs format.replace <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Replace.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {content -> pvh:format.replace(substring: 'foo', replacement: 'bar')}
+   {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar')}
