@@ -22,10 +22,10 @@
     </coverage>
     <testsuites>
         <testsuite name="buepro-pvh-functional-tests">
-            <directory>../Tests/Functional</directory>
-<!--            <file>-->
-<!--                ../Tests/Functional/ViewHelpers/Format/TrimViewHelperTest.php-->
-<!--            </file>-->
+<!--            <directory>../Tests/Functional</directory>-->
+            <file>
+                ../Tests/Functional/ViewHelpers/Format/EliminateViewHelperTest.php
+            </file>
         </testsuite>
     </testsuites>
 </phpunit>
