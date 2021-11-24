@@ -1,0 +1,9 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
+{pvh:iterator.random(subject: subject, count: count, shuffle: shuffle, as: as)}
+{subject -> pvh:iterator.random(count: count, shuffle: shuffle, as: 'asChild')}
+<span id="as">{as -> f:format.json()}</span>
+<span id="as-child">{asChild -> f:format.json()}</span>
+<span id="direct">{pvh:iterator.random(subject: subject, count: count, shuffle: shuffle) -> f:format.json()}</span>
+<span id="minimal"><f:format.json>{pvh:iterator.random(subject: subject)}</f:format.json></span>
+</html>

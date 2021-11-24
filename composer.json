@@ -119,6 +119,9 @@
 		"phpstan": [
 			"phpstan analyze --configuration Build/phpstan.neon"
 		],
+		"test:php:unit": [
+			"phpunit -c Build/phpunit-unit.xml"
+		],
 		"test:php:functional": [
 			"phpunit -c Build/phpunit-functional.xml"
 		],
@@ -126,6 +129,7 @@
 			"@cgl",
 			"@test:php:lint",
 			"@phpstan",
+			"@test:php:unit",
 			"@test:php:functional"
 		]
 	}

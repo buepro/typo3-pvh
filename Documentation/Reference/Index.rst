@@ -54,3 +54,38 @@ Usage examples
 
    {content -> pvh:format.replace(substring: 'foo', replacement: 'bar')}
    {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar')}
+
+Iterator
+========
+
+Random
+------
+
+Description
+~~~~~~~~~~~
+
+Select random elements from a coma separated list, array, traversable or query
+result.
+
++-----------+-------------------------------------------------------+----------+
+| Parameter | Description                                           | Default  |
++===========+=======================================================+==========+
+| subject   | The subject Traversable/Array instance from which to  |          |
+|           | select random elements.                               |          |
++-----------+-------------------------------------------------------+----------+
+| count     | Number of randomly selected elements to be returned.  | 1        |
++-----------+-------------------------------------------------------+----------+
+| shuffle   | Shuffle the selected elements.                        | true     |
++-----------+-------------------------------------------------------+----------+
+| as        | Template variable name to assign. If not specified    |          |
+|           | the ViewHelper returns the variable instead.          |          |
++-----------+-------------------------------------------------------+----------+
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pp:iterator.random(subject: someArray, count: 3, as: 'randoms')}
+   {someArray -> pp:iterator.random(count: 3, as: 'randoms')}
+   {pp:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}

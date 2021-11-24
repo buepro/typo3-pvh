@@ -3,17 +3,18 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
         backupGlobals="true"
-        bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTestsBootstrap.php"
+        bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
         colors="true"
         convertErrorsToExceptions="true"
         convertWarningsToExceptions="true"
         forceCoversAnnotation="false"
+        processIsolation="false"
         stopOnError="false"
         stopOnFailure="false"
         stopOnIncomplete="false"
         stopOnSkipped="false"
         verbose="false"
-        beStrictAboutTestsThatDoNotTestAnything="false"
+        beStrictAboutTestsThatDoNotTestAnything="true"
 >
     <coverage processUncoveredFiles="true">
         <include>
@@ -21,11 +22,11 @@
         </include>
     </coverage>
     <testsuites>
-        <testsuite name="buepro-pvh-functional-tests">
-<!--            <directory>../Tests/Functional</directory>-->
-            <file>
-                ../Tests/Functional/ViewHelpers/Iterator/RandomViewHelperTest.php
-            </file>
+        <testsuite name="buepro-pvh-unit-tests">
+            <directory>../Tests/Unit</directory>
+<!--            <file>-->
+<!--                ../Tests/Unit/Utility/IteratorUtilityTest.php-->
+<!--            </file>-->
         </testsuite>
     </testsuites>
 </phpunit>
