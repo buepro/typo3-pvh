@@ -123,3 +123,19 @@ Usage examples
 ::
 
    {pvh:variable.get(name: 'my.template.var.{index}')}
+
+Set
+---
+
+Description
+~~~~~~~~~~~
+
+`See vhs:format.trim <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Variable/Set.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {value -> pvh:variable.set(name: name)}
+   {pvh:variable.set(name: name, value: value)}

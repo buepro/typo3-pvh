@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
+<f:if condition="{name} == 'testTagContent'">
+    <f:then>
+        {value -> pvh:variable.set(name: name)}
+        <span id="vars-tag-content">{_all -> f:format.json()}</span>
+    </f:then>
+    <f:else>
+        {pvh:variable.set(name: name, value: value)}
+        <span id="vars">{_all -> f:format.json()}</span>
+    </f:else>
+</f:if>
+</html>
