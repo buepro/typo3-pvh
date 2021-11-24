@@ -51,6 +51,10 @@ jobs:
         name: PHPStan
         run: |
           composer phpstan -- --error-format=github
+      -
+        name: Unit Tests
+        run: |
+          composer test:php:unit
       - name: Functional Tests
         run: |
           composer test:php:functional
