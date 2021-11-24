@@ -105,3 +105,21 @@ Usage examples
 
    {pvh:iterator.merge(a: a, b: b, useKeys: useKeys, as: 'merged')}
    {pvh:iterator.merge(a: a, b: b, useKeys: useKeys) -> f:format.json()}
+
+Variable
+========
+
+Get
+---
+
+Description
+~~~~~~~~~~~
+
+`See vhs:format.trim <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Variable/Get.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:variable.get(name: 'my.template.var.{index}')}

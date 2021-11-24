@@ -24,7 +24,7 @@
         <testsuite name="buepro-pvh-functional-tests">
 <!--            <directory>../Tests/Functional</directory>-->
             <file>
-                ../Tests/Functional/ViewHelpers/Iterator/MergeViewHelperTest.php
+                ../Tests/Functional/ViewHelpers/Variable/SetViewHelperTest.php
             </file>
         </testsuite>
     </testsuites>
