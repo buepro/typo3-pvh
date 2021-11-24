@@ -1,0 +1,6 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
+{pvh:iterator.merge(a: a, b: b, useKeys: useKeys, as: '_var')}
+<span id="as">{_var -> f:format.json()}</span>
+<span id="direct">{pvh:iterator.merge(a: a, b: b, useKeys: useKeys) -> f:format.json()}</span>
+</html>

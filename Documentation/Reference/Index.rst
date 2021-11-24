@@ -11,7 +11,7 @@ Trim
 Description
 ~~~~~~~~~~~
 
-`See vhs format.trim <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Trim.html>`__
+`See vhs:format.trim <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Trim.html>`__
 
 Usage examples
 ~~~~~~~~~~~~~~
@@ -29,7 +29,7 @@ Eliminate
 Description
 ~~~~~~~~~~~
 
-`See vhs format.eliminate <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Eliminate.html>`__
+`See vhs:format.eliminate <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Eliminate.html>`__
 
 Usage examples
 ~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ Replace
 Description
 ~~~~~~~~~~~
 
-`See vhs format.replace <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Replace.html>`__
+`See vhs:format.replace <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Replace.html>`__
 
 Usage examples
 ~~~~~~~~~~~~~~
@@ -89,3 +89,19 @@ Usage examples
    {pp:iterator.random(subject: someArray, count: 3, as: 'randoms')}
    {someArray -> pp:iterator.random(count: 3, as: 'randoms')}
    {pp:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}
+
+Merge
+-----
+
+Description
+~~~~~~~~~~~
+
+`See vhs:iterator.merge <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Iterator/Merge.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys, as: 'merged')}
+   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys) -> f:format.json()}
