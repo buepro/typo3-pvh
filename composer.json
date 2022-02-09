@@ -23,10 +23,6 @@
         "php": ">=7.3.0",
         "typo3/cms-core": "^10.4 || ^11.5"
     },
-    "replace": {
-        "buepro/typo3-pvh": "self.version",
-        "typo3-ter/pvh": "self.version"
-    },
     "require-dev": {
         "bk2k/extension-helper": "^2.0",
         "buepro/typo3-pizpalue": "^12.0",
