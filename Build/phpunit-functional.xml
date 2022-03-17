@@ -24,7 +24,7 @@
         <testsuite name="buepro-pvh-functional-tests">
             <directory>../Tests/Functional</directory>
 <!--            <file>-->
-<!--                ../Tests/Functional/ViewHelpers/Condition/String/ContainsViewHelperTest.php-->
+<!--                ../Tests/Functional/ViewHelpers/Condition/Variable/IsNullViewHelperTest.php-->
 <!--            </file>-->
         </testsuite>
     </testsuites>

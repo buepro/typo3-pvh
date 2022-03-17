@@ -20,6 +20,24 @@ Usage examples
 
    {pvh:condition.string.contains(haystack: haystack, needle: needle, then: 'then', else: 'else')}
 
+Condition/Variable
+==================
+
+IsNull
+------
+
+Description
+~~~~~~~~~~~
+
+`See vhs:condition.variable.isNull <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Condition/Variable/IsNull.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:condition.variable.isNull(variable: variable, then: 'then', else: 'else')}
+
 Format
 ======
 
