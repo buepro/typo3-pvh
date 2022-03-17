@@ -1,0 +1,18 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
+<span id="inline">{pvh:format.pregReplace(
+    subject: subject,
+    pattern: pattern,
+    replacement: replacement
+)}</span>
+<span id="inline-content">{subject -> pvh:format.pregReplace(
+    pattern: pattern,
+    replacement: replacement
+)}</span>
+<span id="inline-var">{pvh:format.pregReplace(
+    subject: subject,
+    pattern: pattern,
+    replacement: replacement,
+    as: '_as'
+)}{_as}</span>
+</html>

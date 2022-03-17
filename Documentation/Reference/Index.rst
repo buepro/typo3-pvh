@@ -5,6 +5,55 @@ View helper reference
 Format
 ======
 
+Eliminate
+---------
+
+Description
+~~~~~~~~~~~
+
+`See vhs:format.eliminate <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Eliminate.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {content -> pvh:format.eliminate(whitespace: true)}
+   {pvh:format.eliminate(content: someContent, whitespace: true)}
+
+PregReplace
+-----------
+
+Description
+~~~~~~~~~~~
+
+`See vhs:format.eliminate <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/PregReplace.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:format.pregReplace(subject: subject, pattern: pattern, replacement: replacement)}
+   {subject -> pvh:format.pregReplace(pattern: pattern, replacement: replacement)}
+   {pvh:format.pregReplace(subject: subject, pattern: pattern, replacement: replacement, as: '_as')}
+
+Replace
+---------
+
+Description
+~~~~~~~~~~~
+
+`See vhs:format.replace <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Replace.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {content -> pvh:format.replace(substring: 'foo', replacement: 'bar')}
+   {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar')}
+
 Trim
 ----
 
@@ -23,40 +72,24 @@ Usage examples
    {pvh:format.trim(content: someContent)}
    {pvh:format.trim(content: someContent, characters: 'ab')}
 
-Eliminate
----------
-
-Description
-~~~~~~~~~~~
-
-`See vhs:format.eliminate <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Eliminate.html>`__
-
-Usage examples
-~~~~~~~~~~~~~~
-
-::
-
-   {content -> pvh:format.eliminate(whitespace: true)}
-   {pvh:format.eliminate(content: someContent, whitespace: true)}
-
-Replace
----------
-
-Description
-~~~~~~~~~~~
-
-`See vhs:format.replace <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Format/Replace.html>`__
-
-Usage examples
-~~~~~~~~~~~~~~
-
-::
-
-   {content -> pvh:format.replace(substring: 'foo', replacement: 'bar')}
-   {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar')}
-
 Iterator
 ========
+
+Merge
+-----
+
+Description
+~~~~~~~~~~~
+
+`See vhs:iterator.merge <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Iterator/Merge.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys, as: 'merged')}
+   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys) -> f:format.json()}
 
 Random
 ------
@@ -89,22 +122,6 @@ Usage examples
    {pp:iterator.random(subject: someArray, count: 3, as: 'randoms')}
    {someArray -> pp:iterator.random(count: 3, as: 'randoms')}
    {pp:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}
-
-Merge
------
-
-Description
-~~~~~~~~~~~
-
-`See vhs:iterator.merge <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Iterator/Merge.html>`__
-
-Usage examples
-~~~~~~~~~~~~~~
-
-::
-
-   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys, as: 'merged')}
-   {pvh:iterator.merge(a: a, b: b, useKeys: useKeys) -> f:format.json()}
 
 Variable
 ========
