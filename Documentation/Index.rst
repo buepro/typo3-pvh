@@ -1,53 +1,35 @@
-.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. include:: Includes.txt
-
+.. include:: /Includes.rst.txt
 
 .. _start:
 
-===========================
-Pizpalue view helpers (pvh)
-===========================
+===
+Pvh
+===
 
-.. only:: html
+:Extension key:
+   pizpalue
 
-   :Classification:
-      pvh
+:Version:
+   |release|
 
-   :Version:
-      |release|
+:Language:
+   en
 
-   :Language:
-      en
+:Author:
+   Roman Büchler
 
-   :Keywords:
-      view helper, pizpalue
+:Email:
+   rb@buechler.pro
 
-   :Copyright:
-      Since 2021
+:License:
+   This document is published under the Open Content License
+   available from https://www.openhub.net/licenses/opl.
 
-   :Author:
-      Roman Büchler
-
-   :Email:
-      rb@buechler.pro
-
-   :License:
-      This document is published under the Open Content License
-      available from http://www.opencontent.org/opl.shtml
-
-   :Rendered:
-      |today|
-
-   The content of this document is related to TYPO3,
-   a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`__.
+:Rendered:
+   |today|
 
 
-
-   **Table of Contents**
+**Table of Contents**
 
 .. toctree::
    :maxdepth: 2
