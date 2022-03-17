@@ -2,6 +2,24 @@
 View helper reference
 =============================================
 
+Condition/String
+================
+
+Contains
+--------
+
+Description
+~~~~~~~~~~~
+
+`See vhs:condition.string.contains <https://viewhelpers.fluidtypo3.org/fluidtypo3/vhs/5.0.1/Condition/String/Contains.html>`__
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:condition.string.contains(haystack: haystack, needle: needle, then: 'then', else: 'else')}
+
 Format
 ======
 
