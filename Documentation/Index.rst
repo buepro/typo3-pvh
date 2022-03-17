@@ -36,3 +36,4 @@ Pvh
 
    Introduction/Index
    Reference/Index
+   Changelog/Index
