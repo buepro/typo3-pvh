@@ -15,4 +15,11 @@
     replacement: replacement,
     as: '_as'
 )}{_as}</span>
+<span id="tag-content">
+    <pvh:format.pregReplace pattern="{pattern}" replacement="{replacement}">{subject}</pvh:format.pregReplace>
+</span>
+<span id="tag-content-var">
+    <pvh:format.pregReplace pattern="{pattern}" replacement="{replacement}" as="_as">{subject}</pvh:format.pregReplace>
+    {_as}
+</span>
 </html>

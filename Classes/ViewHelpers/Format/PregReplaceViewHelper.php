@@ -43,14 +43,8 @@ class PregReplaceViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        $result = '';
-        $subject = $arguments['subject'] ?? '';
-        if ($subject === '') {
-            $subject = $renderChildrenClosure();
-        }
-        if ($subject !== '') {
-            $result = preg_replace($arguments['pattern'], $arguments['replacement'], $subject);
-        }
+        $subject = $arguments['subject'] ?? $renderChildrenClosure() ?? '';
+        $result = preg_replace($arguments['pattern'], $arguments['replacement'], $subject);
         return static::finalizeRenderStaticWithAsArgument($arguments, $renderingContext, $result);
     }
 }

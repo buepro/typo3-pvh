@@ -49,7 +49,7 @@ class PregReplaceViewHelperTest extends FunctionalTestCase
         $view->assignMultiple($this->arguments);
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);
-        foreach (['inline', 'inline-content', 'inline-var'] as $id) {
+        foreach (['inline', 'inline-content', 'inline-var', 'tag-content', 'tag-content-var'] as $id) {
             [$node] = $xml->xpath('//span[@id="' . $id . '"]');
             $actual = trim((string)$node);
             self::assertSame('foobazbar', $actual, 'Iteration: ' . $id);
