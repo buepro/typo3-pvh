@@ -1,5 +1,17 @@
 .. include:: /Includes.rst.txt
 
+.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
+   :alt: TYPO3 11
+   :target: https://get.typo3.org/version/11
+
+.. image:: https://img.shields.io/badge/TYPO3-10-orange.svg
+   :alt: TYPO3 10
+   :target: https://get.typo3.org/version/10
+
+.. image:: https://github.com/buepro/typo3-pizpalue/workflows/CI/badge.svg
+   :alt: Continuous Integration Status
+   :target: https://github.com/buepro/typo3-pvh/actions?query=workflow%3ACI
+
 =============================================
 Introduction
 =============================================
@@ -13,10 +25,3 @@ excellent extension.
 Why copy code? To offer stable releases earlier. Stable releases from VHS
 used to be available a view month after a TYPO3-LTS-release. This extension
 is going to have stable releases available together with pizpalue.
-
-Code quality
-============
-
-.. image:: https://github.com/buepro/typo3-pvh/workflows/CI/badge.svg
-   :alt: Continuous Integration Status
-   :target: https://github.com/buepro/typo3-pvh/actions?query=workflow%3ACI
