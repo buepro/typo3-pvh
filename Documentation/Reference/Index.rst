@@ -90,7 +90,7 @@ Usage examples
 ::
 
    {content -> pvh:format.replace(substring: 'foo', replacement: 'bar')}
-   {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar')}
+   {pvh:format.replace(content: someContent, substring: 'foo', replacement: 'bar', count: 1)}
 
 Trim
 ----
