@@ -8,7 +8,7 @@
    :alt: TYPO3 11
    :target: https://get.typo3.org/version/11
 
-.. image:: https://github.com/buepro/typo3-pizpalue/workflows/CI/badge.svg
+.. image:: https://github.com/buepro/typo3-pvh/workflows/CI/badge.svg
    :alt: Continuous Integration Status
    :target: https://github.com/buepro/typo3-pvh/actions?query=workflow%3ACI
 
