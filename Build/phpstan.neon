@@ -10,6 +10,9 @@ parameters:
 	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
 
+	ignoreErrors:
+		- "#Construct empty\\(\\) is not allowed. Use more strict comparison\\.#"
+
 	paths:
 	- %currentWorkingDirectory%/Classes/
 	- %currentWorkingDirectory%/Tests/

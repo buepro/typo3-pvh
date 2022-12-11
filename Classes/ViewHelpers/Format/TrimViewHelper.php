@@ -43,7 +43,7 @@ class TrimViewHelper extends AbstractViewHelper
     ): string {
         $characters = $arguments['characters'];
         $content = $renderChildrenClosure();
-        if ((string)$characters !== '') {
+        if (false === empty($characters)) {
             $content = trim($content, $characters);
         } else {
             $content = trim($content);
