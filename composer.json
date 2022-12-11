@@ -20,29 +20,24 @@
         }
     ],
     "require": {
-        "php": ">=7.3.0",
-        "typo3/cms-core": "^10.4 || ^11.5"
+        "typo3/cms-core": "^11.5 || ^12.1 || 12.*.*@dev"
     },
-    "require-dev": {
-        "bk2k/extension-helper": "^2.0",
-        "buepro/typo3-pizpalue": "^12.0",
-        "ergebnis/composer-normalize": "^2.15.0",
-        "friendsofphp/php-cs-fixer": "^3.0.0",
-        "friendsoftypo3/phpstan-typo3": "^0.8.1",
-        "helhum/typo3-console": "^6.6 || ^7.0.2",
-        "overtrue/phplint": "^2.3.5",
-        "phpspec/prophecy-phpunit": "^1.1 || ^2.0",
-        "phpstan/phpstan": "^0.12.87",
-        "phpstan/phpstan-deprecation-rules": "^0.12.6",
-        "phpstan/phpstan-phpunit": "^0.12.19",
-        "phpstan/phpstan-strict-rules": "^0.12.9",
-        "roave/security-advisories": "dev-latest",
-        "typo3/cms-base-distribution": "^10.4 || ^11.5",
-        "typo3/cms-impexp": "^10.4 || ^11.5",
-        "typo3/cms-lowlevel": "^10.4 || ^11.5",
-        "typo3/cms-recycler": "^10.4 || ^11.5",
-        "typo3/testing-framework": "^5.0 || ^6.4"
-    },
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.15.0",
+		"friendsofphp/php-cs-fixer": "^3.0.0",
+		"friendsoftypo3/phpstan-typo3": "^0.9.0",
+		"overtrue/phplint": "^3.2.0 || ^4.3.0 || ^5.3.0",
+		"phpspec/prophecy-phpunit": "^2.0",
+		"phpstan/phpstan": "^1.8.5",
+		"phpstan/phpstan-deprecation-rules": "^1.0.0",
+		"phpstan/phpstan-phpunit": "^1.1.1",
+		"phpstan/phpstan-strict-rules": "^1.4.3",
+		"roave/security-advisories": "dev-latest",
+		"typo3/cms-base-distribution": "^11.5 || ^12.1 || 12.*.*@dev",
+		"typo3/cms-lowlevel": "^11.5 || ^12.1 || 12.*.*@dev",
+		"typo3/cms-recycler": "^11.5 || ^12.1 || 12.*.*@dev",
+		"typo3/testing-framework": "^6.4 || 7.*.*@dev"
+	},
     "config": {
         "bin-dir": ".build/bin",
         "optimize-autoloader": true,
@@ -56,10 +51,9 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "1.1.x-dev"
+            "dev-main": "2.0.x-dev"
         },
         "typo3/cms": {
-            "app-dir": ".build",
             "extension-key": "pvh",
             "web-dir": ".build/public"
         }
@@ -78,13 +72,15 @@
     "prefer-stable": true,
     "scripts": {
         "pre-autoload-dump": [
-            "mkdir -p .build/public/typo3conf/ext/",
-            "rm -f .build/public/typo3conf/ext/pvh"
+            "[ -d .build/public/_assets ] || mkdir -p .build/public/typo3conf/ext/",
+            "[ -d .build/public/_assets ] || rm -f .build/public/typo3conf/ext/pvh"
         ],
         "post-autoload-dump": [
-            "ln -snvf ../../../../. .build/public/typo3conf/ext/pvh",
-            "mkdir -p .build/config/sites/default",
-            "[ -L .build/config/sites/default/config.yaml ] || ln -svf ../../../../Build/site/config.yaml .build/config/sites/default/config.yaml"
+            "[ -d .build/public/_assets ] || ln -snvf ../../../../. .build/public/typo3conf/ext/pvh",
+            "[ -d .build/public/_assets ] || mkdir -p .build/config/sites/default",
+            "[ -d .build/public/_assets ] || [ -L .build/config/sites/default/config.yaml ] || ln -svf ../../../../Build/site/config.yaml .build/config/sites/default/config.yaml",
+			"[ ! -d .build/public/_assets ] || mkdir -p config/sites/default",
+			"[ ! -d .build/public/_assets ] || [ -L config/sites/default/config.yaml ] || ln -svf ../../../Build/site/config.yaml config/sites/default/config.yaml"
         ],
         "ci": [
             "@ci:static",
@@ -135,16 +131,19 @@
         "fix:php:cs": [
             "php-cs-fixer --diff -v fix"
         ],
+		"fix:php:stan": [
+			"phpstan analyze --level max --configuration Build/phpstan.neon --generate-baseline Build/phpstan-baseline.neon"
+		],
         "site:install": [
             "@typo3cms:install:setup",
             "@typo3cms:database:import"
         ],
         "typo3cms:database:export": [
-            ".build/bin/typo3cms database:export -c Default -e 'cf_*' -e 'cache_*' -e '[bf]e_sessions' -e sys_log | gzip -c > Build/site/db.sql.gz",
-            "ls -l Build/site/db.sql.gz"
+            ".build/bin/typo3cms database:export -c Default -e 'cf_*' -e 'cache_*' -e '[bf]e_sessions' -e sys_log | gzip -c > Build/site/db12.sql.gz",
+            "ls -l Build/site/db*.sql.gz"
         ],
         "typo3cms:database:import": [
-            "gzip -cdk Build/site/db.sql.gz | .build/bin/typo3cms database:import"
+            "gzip -cdk Build/site/db12.sql.gz | .build/bin/typo3cms database:import"
         ],
         "typo3cms:install:setup": [
             ".build/bin/typo3cms install:setup --no-interaction --use-existing-database --database-host-name='db' --database-name='db' --database-user-name='db' --database-user-password='db' --admin-user-name='admin' --admin-password='admin123ADMIN:)' --site-name='pvh dev' --web-server-config='apache'"

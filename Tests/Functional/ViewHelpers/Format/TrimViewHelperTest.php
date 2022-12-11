@@ -55,7 +55,7 @@ class TrimViewHelperTest extends FunctionalTestCase
         $xml = new \SimpleXMLElement($html);
         $id = $characters !== null ? 'characters' : 'no-characters';
         foreach (['param', 'var'] as $usage) {
-            [$node] = $xml->xpath('//span[@id="' . $id . '-' . $usage . '"]');
+            [$node] = (array) $xml->xpath('//span[@id="' . $id . '-' . $usage . '"]');
             $actual = trim((string)$node);
             self::assertSame($expected, $actual);
         }

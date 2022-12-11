@@ -23,16 +23,20 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * ViewHelper used to read the value of a current template
  * variable. Can be used with dynamic indices in arrays:
  *
- *     <v:variable.get name="array.{dynamicIndex}" />
- *     <v:variable.get name="array.{v:variable.get(name: 'arrayOfSelectedKeys.{indexInArray}')}" />
- *     <f:for each="{v:variable.get(name: 'object.arrayProperty.{dynamicIndex}')}" as="nestedObject">
- *         ...
- *     </f:for>
+ * ```
+ * <v:variable.get name="array.{dynamicIndex}" />
+ * <v:variable.get name="array.{v:variable.get(name: 'arrayOfSelectedKeys.{indexInArray}')}" />
+ * <f:for each="{v:variable.get(name: 'object.arrayProperty.{dynamicIndex}')}" as="nestedObject">
+ *     ...
+ * </f:for>
+ * ```
  *
  * Or to read names of variables which contain dynamic parts:
  *
- *     <!-- if {variableName} is "Name", outputs value of {dynamicName} -->
- *     {v:variable.get(name: 'dynamic{variableName}')}
+ * ```
+ * <!-- if {variableName} is "Name", outputs value of {dynamicName} -->
+ * {v:variable.get(name: 'dynamic{variableName}')}
+ * ```
  *
  * If your target object is an array with unsequential yet
  * numeric indices (e.g. {123: 'value1', 513: 'value2'},
@@ -70,17 +74,15 @@ class GetViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
      * @return mixed
      */
-    public static function renderStatic(// @phpstan-ignore-line
+    public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
         $variableProvider = $renderingContext->getVariableProvider();
+        /** @var string $name */
         $name = $arguments['name'];
         $useRawKeys = $arguments['useRawKeys'];
         if (false === strpos($name, '.')) {
@@ -99,12 +101,13 @@ class GetViewHelper extends AbstractViewHelper
                 try {
                     $value = $templateVariableRoot;
                     foreach ($segments as $segment) {
-                        if (true === ctype_digit($segment)) {
+                        if (is_numeric($segment) && (int) $segment == $segment) {
                             $segment = intval($segment);
                             $index = 0;
                             $found = false;
                             // Note: this loop approach is not a stupid solution. If you doubt this,
                             // attempt to feth a number at a numeric index from ObjectStorage ;)
+                            /** @var iterable $value */
                             foreach ($value as $possibleValue) {
                                 if ($index === $segment) {
                                     $value = $possibleValue;

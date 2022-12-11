@@ -80,7 +80,7 @@ class SetViewHelper extends AbstractViewHelper
     /**
      * @return mixed
      */
-    public static function renderStatic(// @phpstan-ignore-line
+    public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext

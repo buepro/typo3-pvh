@@ -22,7 +22,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class MergeViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var bool
      */
@@ -61,7 +60,7 @@ class MergeViewHelper extends AbstractViewHelper
     /**
      * @return array|mixed|string
      */
-    public static function renderStatic(// @phpstan-ignore-line
+    public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext

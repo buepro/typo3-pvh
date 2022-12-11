@@ -2,6 +2,8 @@
 .build/
 .idea/
 Documentation-GENERATED-temp/
+config/
+var/
 
 # Files
 composer.lock

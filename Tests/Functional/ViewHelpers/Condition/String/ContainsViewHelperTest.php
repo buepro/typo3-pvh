@@ -62,7 +62,7 @@ class ContainsViewHelperTest extends FunctionalTestCase
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
-        $view->assignMultiple(array_replace($this->arguments, ['needle' => 'bur']) ?? []);
+        $view->assignMultiple(array_replace($this->arguments, ['needle' => 'bur']));
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);
         [$node] = $xml->xpath('//span[@id="inline"]');

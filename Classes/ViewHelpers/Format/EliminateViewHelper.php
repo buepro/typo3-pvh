@@ -88,7 +88,11 @@ class EliminateViewHelper extends AbstractViewHelper
     ): string {
         $content = $renderChildrenClosure();
         if (true === isset($arguments['characters'])) {
-            $content = static::eliminateCharacters($content, $arguments['characters'], (boolean) $arguments['caseSensitive']);
+            $content = static::eliminateCharacters(
+                $content,
+                $arguments['characters'],
+                (boolean) $arguments['caseSensitive']
+            );
         }
         if (true === isset($arguments['strings'])) {
             $content = static::eliminateStrings($content, $arguments['strings'], (boolean) $arguments['caseSensitive']);
@@ -121,17 +125,17 @@ class EliminateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param mixed $characters
+     * @param string $content
+     * @param string|array $characters
+     * @param bool $caseSensitive
+     * @return string
      */
     protected static function eliminateCharacters(string $content, $characters, bool $caseSensitive): string
     {
-        if (true === is_array($characters)) {
+        if (is_array($characters)) {
             $subjects = $characters;
         } else {
-            $subjects = preg_split('//u', $characters, 0, PREG_SPLIT_NO_EMPTY);
-            if (!is_array($subjects)) {
-                $subjects = [];
-            }
+            $subjects = (array) preg_split('//u', $characters, 0, PREG_SPLIT_NO_EMPTY);
         }
         foreach ($subjects as $subject) {
             if (true === $caseSensitive) {
@@ -144,11 +148,14 @@ class EliminateViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param mixed $strings
+     * @param string $content
+     * @param string|array $strings
+     * @param bool $caseSensitive
+     * @return string
      */
     protected static function eliminateStrings(string $content, $strings, bool $caseSensitive): string
     {
-        if (true === is_array($strings)) {
+        if (is_array($strings)) {
             $subjects = $strings;
         } else {
             $subjects = explode(',', $strings);
@@ -166,12 +173,12 @@ class EliminateViewHelper extends AbstractViewHelper
     protected static function eliminateWhitespace(string $content): string
     {
         $content = preg_replace('/\s+/', '', $content);
-        return (string)$content;
+        return (string) $content;
     }
 
     protected static function eliminateWhitespaceBetweenHtmlTags(string $content): string
     {
-        $content = trim((string)preg_replace('/>\s+</', '><', $content));
+        $content = trim((string) preg_replace('/>\s+</', '><', $content));
         return $content;
     }
 
@@ -196,7 +203,7 @@ class EliminateViewHelper extends AbstractViewHelper
     protected static function eliminateDigits(string $content): string
     {
         $content = preg_replace('#[0-9]#', '', $content);
-        return (string)$content;
+        return (string) $content;
     }
 
     protected static function eliminateLetters(string $content, bool $caseSensitive): string
@@ -206,13 +213,13 @@ class EliminateViewHelper extends AbstractViewHelper
         } else {
             $content = preg_replace('/[a-z]/i', '', $content);
         }
-        return (string)$content;
+        return (string) $content;
     }
 
     protected static function eliminateNonAscii(string $content, bool $caseSensitive): string
     {
         $caseSensitiveIndicator = true === $caseSensitive ? 'i' : '';
         $content = preg_replace('/[^(\x20-\x7F)]*/' . $caseSensitiveIndicator, '', $content);
-        return (string)$content;
+        return (string) $content;
     }
 }

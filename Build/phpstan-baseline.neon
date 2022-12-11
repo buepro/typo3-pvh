@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Return type \\(mixed\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Format\\\\PregReplaceViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Format/PregReplaceViewHelper.php
+
+		-
+			message: "#^Return type \\(mixed\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Iterator\\\\MergeViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Iterator/MergeViewHelper.php
+
+		-
+			message: "#^Return type \\(array\\|string\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Iterator\\\\RandomViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Iterator/RandomViewHelper.php
+
+		-
+			message: "#^Return type \\(mixed\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Variable\\\\GetViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Variable/GetViewHelper.php
+
+		-
+			message: "#^Return type \\(mixed\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Variable\\\\SetViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Variable/SetViewHelper.php

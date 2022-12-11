@@ -23,7 +23,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 class ContainsViewHelper extends AbstractConditionViewHelper
 {
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('haystack', 'string', 'haystack', true);
@@ -32,7 +32,6 @@ class ContainsViewHelper extends AbstractConditionViewHelper
 
     public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
-        // @phpstan-ignore-next-line
         return false !== strpos($arguments['haystack'], (string) $arguments['needle']);
     }
 }

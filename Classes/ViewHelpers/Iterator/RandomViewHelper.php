@@ -68,7 +68,7 @@ class RandomViewHelper extends AbstractViewHelper
     /**
      * @return array|string
      */
-    public static function renderStatic(// @phpstan-ignore-line
+    public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext

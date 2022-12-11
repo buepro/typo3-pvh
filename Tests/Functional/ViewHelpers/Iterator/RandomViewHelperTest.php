@@ -80,6 +80,7 @@ class RandomViewHelperTest extends FunctionalTestCase
         $xml = new \SimpleXMLElement($html);
         [$node] = $xml->xpath('//span[@id="as"]');
         $actual = json_decode(trim((string)$node));
+        self::assertIsArray($actual);
         $this->testActual($arguments, $actual);
     }
 
@@ -94,6 +95,7 @@ class RandomViewHelperTest extends FunctionalTestCase
         foreach (['as', 'as-child', 'direct'] as $id) {
             [$node] = $xml->xpath('//span[@id="' . $id . '"]');
             $actual = json_decode(trim((string)$node));
+            self::assertIsArray($actual);
             $this->testActual($arguments, $actual);
         }
     }
@@ -107,6 +109,7 @@ class RandomViewHelperTest extends FunctionalTestCase
         $xml = new \SimpleXMLElement($html);
         [$node] = $xml->xpath('//span[@id="minimal"]');
         $actual = json_decode(trim((string)$node));
+        self::assertIsArray($actual);
         $this->testActual($this->arguments, $actual);
     }
 }

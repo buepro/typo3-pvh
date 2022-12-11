@@ -38,7 +38,7 @@ class PregReplaceViewHelper extends AbstractViewHelper
     /**
      * @return mixed|string
      */
-    public static function renderStatic(// @phpstan-ignore-line
+    public static function renderStatic(
         array $arguments,
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext

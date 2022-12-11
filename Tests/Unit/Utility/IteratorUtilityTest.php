@@ -11,20 +11,17 @@ declare(strict_types=1);
 namespace Buepro\Pvh\Tests\Unit\Utility;
 
 use Buepro\Pvh\Utility\IteratorUtility;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class IteratorUtilityTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     public function arrayFromArrayOrTraversableOrCSVDataProvider(): array
     {
         $traversable = new \ArrayObject(['foo1' => 'foo', 'bar1' => 'bar']);
-        $queryResultProphecy = $this->prophesize(QueryResult::class);
+        $queryResultMock = $this->createMock(QueryResult::class);
         /** @phpstan-ignore-next-line */
-        $queryResultProphecy->toArray()->willReturn(['foo', 'bar']);
+        $queryResultMock->method('toArray')->willReturn(['foo', 'bar']);
         return [
             'candidate is integer' => [[], 5, true],
             'candidate is array with associative keys' =>
@@ -34,7 +31,7 @@ class IteratorUtilityTest extends UnitTestCase
             'candidate is array' => [['foo', 'bar'], ['foo', 'bar'], true],
             'candidate is traversable' => [['foo1' => 'foo', 'bar1' => 'bar'], $traversable, true],
             'candidate is traversable and keys are not preserved' => [['foo', 'bar'], $traversable, false],
-            'candidate is query result' => [['foo', 'bar'], $queryResultProphecy->reveal(), true],
+            'candidate is query result' => [['foo', 'bar'], $queryResultMock, true],
         ];
     }
 
