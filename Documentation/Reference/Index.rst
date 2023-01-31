@@ -40,6 +40,26 @@ Usage examples
 
    {pvh:condition.variable.isNull(variable: variable, then: 'then', else: 'else')}
 
+Core
+====
+
+Version
+-------
+
+Description
+~~~~~~~~~~~
+
+Returns the core version number in the format `M.fff.bbb`. The version `11.5.21` would
+result in `11005021`.
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:core.version()}
+   {pvh:core.version(as: '_version')}
+
 Format
 ======
 
