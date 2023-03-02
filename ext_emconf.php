@@ -11,13 +11,13 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'PVH: Pizpalue View Helpers',
     'description' => 'A collection of view helpers used by pizpalue. Contains copies from vhs view helpers by Claus Due.',
     'category' => 'misc',
-    'version' => '2.0.0-dev',
+    'version' => '2.0.0',
     'state' => 'stable',
     'author' => 'Roman Büchler',
     'author_email' => 'rb@buechler.pro',
     'constraints' => [
         'depends' => [
-            'typo3' => '11.5.0-12.1.99',
+            'typo3' => '11.5.0-12.99.99',
         ],
     ],
     'autoload' => [
