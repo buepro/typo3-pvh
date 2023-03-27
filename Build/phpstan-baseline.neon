@@ -11,6 +11,11 @@ parameters:
 			path: ../Classes/ViewHelpers/Iterator/MergeViewHelper.php
 
 		-
+			message: "#^Negated boolean expression is always false\\.$#"
+			count: 1
+			path: ../Classes/ViewHelpers/Iterator/RandomViewHelper.php
+
+		-
 			message: "#^Return type \\(array\\|string\\) of method Buepro\\\\Pvh\\\\ViewHelpers\\\\Iterator\\\\RandomViewHelper\\:\\:renderStatic\\(\\) should be covariant with return type \\(string\\) of method TYPO3Fluid\\\\Fluid\\\\Core\\\\ViewHelper\\\\ViewHelperInterface\\:\\:renderStatic\\(\\)$#"
 			count: 1
 			path: ../Classes/ViewHelpers/Iterator/RandomViewHelper.php
