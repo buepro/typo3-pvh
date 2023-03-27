@@ -41,6 +41,7 @@ class VersionViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
+        /** @var array{as: ?string} $arguments */
         $result = VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getNumericTypo3Version());
         if (!empty($arguments['as'])) {
             $variableProvider = $renderingContext->getVariableProvider();

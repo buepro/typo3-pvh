@@ -86,16 +86,32 @@ class EliminateViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
+        /**
+         * @var array{
+         *     content: ?string,
+         *     caseSensitive: bool,
+         *     characters: null|string|array,
+         *     strings: null|string|array,
+         *     whitespace: bool,
+         *     whitespaceBetweenHtmlTags: bool,
+         *     tabs: bool,
+         *     unixBreaks: bool,
+         *     windowsBreaks: bool,
+         *     digits: bool,
+         *     letters: bool,
+         *     nonAscii: bool
+         * } $arguments
+         */
         $content = $renderChildrenClosure();
         if (true === isset($arguments['characters'])) {
             $content = static::eliminateCharacters(
                 $content,
                 $arguments['characters'],
-                (boolean) $arguments['caseSensitive']
+                $arguments['caseSensitive']
             );
         }
         if (true === isset($arguments['strings'])) {
-            $content = static::eliminateStrings($content, $arguments['strings'], (boolean) $arguments['caseSensitive']);
+            $content = static::eliminateStrings($content, $arguments['strings'], $arguments['caseSensitive']);
         }
         if (true === $arguments['whitespace']) {
             $content = static::eliminateWhitespace($content);
@@ -116,10 +132,10 @@ class EliminateViewHelper extends AbstractViewHelper
             $content = static::eliminateDigits($content);
         }
         if (true === $arguments['letters']) {
-            $content = static::eliminateLetters($content, (boolean) $arguments['caseSensitive']);
+            $content = static::eliminateLetters($content, $arguments['caseSensitive']);
         }
         if (true === $arguments['nonAscii']) {
-            $content = static::eliminateNonAscii($content, (boolean) $arguments['caseSensitive']);
+            $content = static::eliminateNonAscii($content, $arguments['caseSensitive']);
         }
         return $content;
     }

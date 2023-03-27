@@ -28,7 +28,7 @@ class ReplaceViewHelper extends AbstractViewHelper
         $this->registerArgument('content', 'string', 'Content in which to perform replacement');
         $this->registerArgument('substring', 'string', 'Substring to replace', true);
         $this->registerArgument('replacement', 'string', 'Replacement to insert', false, '');
-        $this->registerArgument('count', 'integer', 'Maximum number of times to perform replacement');
+        $this->registerArgument('count', 'integer', 'Maximum number of times to perform replacement', false, null);
         $this->registerArgument('caseSensitive', 'boolean', 'If true, perform case-sensitive replacement', false, true);
     }
 
@@ -37,13 +37,13 @@ class ReplaceViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): string {
+        /** @var array{content: ?string, substring: string, replacement: string, count: ?int, caseSensitive: bool} $arguments */
         $content = $renderChildrenClosure();
         $substring = $arguments['substring'];
         $replacement = $arguments['replacement'];
-        $count = (integer) $arguments['count'];
-        $caseSensitive = (boolean) $arguments['caseSensitive'];
+        $caseSensitive = $arguments['caseSensitive'];
         $function = (true === $caseSensitive ? 'str_replace' : 'str_ireplace');
-        $result = $function($substring, $replacement, $content, $count);
+        $result = $function($substring, $replacement, $content, $arguments['count']);
         if (!is_string($result)) {
             return '';
         }

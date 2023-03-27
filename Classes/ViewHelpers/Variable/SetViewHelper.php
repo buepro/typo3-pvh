@@ -85,6 +85,7 @@ class SetViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
+        /** @var string $name */
         $name = $arguments['name'];
         $value = $renderChildrenClosure();
         $variableProvider = $renderingContext->getVariableProvider();

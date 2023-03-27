@@ -73,18 +73,19 @@ class RandomViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
+        /** @var array{subject: mixed, count: int, shuffle: boolean, as: string} $arguments */
         $subject = $arguments['subject'] ?? $renderChildrenClosure();
         $subject = IteratorUtility::arrayFromArrayOrTraversableOrCSV($subject);
-        $count = (int)$arguments['count'] > count($subject) ? count($subject) : (int)$arguments['count'];
+        $count = $arguments['count'] > count($subject) ? count($subject) : $arguments['count'];
         $keys = array_rand($subject, $count);
         $keys = is_array($keys) ? $keys : [$keys];
         $result = array_intersect_key($subject, array_flip($keys));
-        if ((bool)$arguments['shuffle']) {
+        if ($arguments['shuffle']) {
             if (!shuffle($result)) {
                 $result = array_intersect_key($subject, $keys);
             }
         }
-        if ($arguments['as']) {
+        if (!empty($arguments['as'])) {
             $variableProvider = $renderingContext->getVariableProvider();
             $variableProvider->add($arguments['as'], $result);
             return '';

@@ -65,10 +65,11 @@ class MergeViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
+        /** @var array{a: mixed, b: mixed, useKeys: bool, as: string} $arguments */
         $a = IteratorUtility::arrayFromArrayOrTraversableOrCSV($arguments['a'] ?? $renderChildrenClosure(), $arguments['useKeys']);
         $b = IteratorUtility::arrayFromArrayOrTraversableOrCSV($arguments['b'], $arguments['useKeys']);
         ArrayUtility::mergeRecursiveWithOverrule($a, $b);
-        if ($arguments['as']) {
+        if (!empty($arguments['as'])) {
             $variableProvider = $renderingContext->getVariableProvider();
             $variableProvider->add($arguments['as'], $a);
             return '';
