@@ -20,9 +20,10 @@
         }
     ],
     "require": {
-        "typo3/cms-core": "^11.5 || ^12.2 || 12.*.*@dev"
+        "typo3/cms-core": "^11.5 || ^12.4"
     },
 	"require-dev": {
+		"buepro/typo3-pizpalue": "^15.2",
 		"ergebnis/composer-normalize": "^2.15.0",
 		"friendsofphp/php-cs-fixer": "^3.0.0",
 		"friendsoftypo3/phpstan-typo3": "^0.9.0",
@@ -33,9 +34,9 @@
 		"phpstan/phpstan-phpunit": "^1.1.1",
 		"phpstan/phpstan-strict-rules": "^1.4.3",
 		"roave/security-advisories": "dev-latest",
-		"typo3/cms-base-distribution": "^11.5 || ^12.2 || 12.*.*@dev",
-		"typo3/cms-lowlevel": "^11.5 || ^12.2 || 12.*.*@dev",
-		"typo3/cms-recycler": "^11.5 || ^12.2 || 12.*.*@dev",
+		"typo3/cms-base-distribution": "^11.5 || ^12.4",
+		"typo3/cms-lowlevel": "^11.5 || ^12.4",
+		"typo3/cms-recycler": "^11.5 || ^12.4",
 		"typo3/testing-framework": "^6.4 || 7.*.*@dev"
 	},
     "config": {
