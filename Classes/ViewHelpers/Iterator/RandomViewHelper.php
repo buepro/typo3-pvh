@@ -73,7 +73,7 @@ class RandomViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        /** @var array{subject: mixed, count: int, shuffle: boolean, as: string} $arguments */
+        /** @var array{subject: mixed, count: int, shuffle: bool, as: string} $arguments */
         $subject = $arguments['subject'] ?? $renderChildrenClosure();
         $subject = IteratorUtility::arrayFromArrayOrTraversableOrCSV($subject);
         $count = $arguments['count'] > count($subject) ? count($subject) : $arguments['count'];
