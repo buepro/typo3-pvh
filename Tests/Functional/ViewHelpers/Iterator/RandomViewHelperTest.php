@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Iterator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,27 +20,18 @@ class RandomViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Iterator/Fixtures/Random.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    /**
-     * @var int[]
-     */
-    private $subject = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    private static array $subject = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
     /**
      * @var array
      */
-    private $arguments = [
+    private static $arguments = [
         'count' => 1,
         'shuffle' => true,
         'as' => 'as',
@@ -62,18 +55,16 @@ class RandomViewHelperTest extends FunctionalTestCase
         }
     }
 
-    public function renderDataProvider(): array
+    public static function renderDataProvider(): array
     {
         return [
-            'one item' => [$this->subject, $this->arguments],
-            'three items' => [$this->subject, array_merge($this->arguments, ['count' => 3])],
+            'one item' => [self::$subject, self::$arguments],
+            'three items' => [self::$subject, array_merge(self::$arguments, ['count' => 3])],
         ];
     }
 
-    /**
-     * @dataProvider renderDataProvider
-     * @test
-     */
+    #[DataProvider('renderDataProvider')]
+    #[Test]
     public function render(array $subject, array $arguments): void
     {
         $html = $this->getView($subject, $arguments)->render();
@@ -84,13 +75,11 @@ class RandomViewHelperTest extends FunctionalTestCase
         $this->testActual($arguments, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function supportedUsage(): void
     {
-        $arguments = array_merge($this->arguments, ['count' => 3]);
-        $html = $this->getView($this->subject, $arguments)->render();
+        $arguments = array_merge(self::$arguments, ['count' => 3]);
+        $html = $this->getView(self::$subject, $arguments)->render();
         $xml = new \SimpleXMLElement($html);
         foreach (['as', 'as-child', 'direct'] as $id) {
             [$node] = $xml->xpath('//span[@id="' . $id . '"]');
@@ -100,16 +89,14 @@ class RandomViewHelperTest extends FunctionalTestCase
         }
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function subjectOnly(): void
     {
-        $html = $this->getView($this->subject, $this->arguments)->render();
+        $html = $this->getView(self::$subject, self::$arguments)->render();
         $xml = new \SimpleXMLElement($html);
         [$node] = $xml->xpath('//span[@id="minimal"]');
         $actual = json_decode(trim((string)$node));
         self::assertIsArray($actual);
-        $this->testActual($this->arguments, $actual);
+        $this->testActual(self::$arguments, $actual);
     }
 }

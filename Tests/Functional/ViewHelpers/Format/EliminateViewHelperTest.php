@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Format;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,15 +20,9 @@ class EliminateViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Format/Fixtures/Eliminate.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $arguments = [
+    protected static array $arguments = [
         'caseSensitive' => true,
         'characters' => null,
         'strings' => null,
@@ -40,55 +36,50 @@ class EliminateViewHelperTest extends FunctionalTestCase
         'nonAscii' => false
     ];
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    public function renderDataProvider(): array
+    public static function renderDataProvider(): array
     {
         return [
-            'remove non ascii code' => ['fooøæåbar', array_merge($this->arguments, ['nonAscii' => true]), 'foobar'],
-            'remove letters' => ['foo123bar', array_merge($this->arguments, ['letters' => true]), '123'],
+            'remove non ascii code' => ['fooøæåbar', array_merge(self::$arguments, ['nonAscii' => true]), 'foobar'],
+            'remove letters' => ['foo123bar', array_merge(self::$arguments, ['letters' => true]), '123'],
             'remove letters case sensitive' => [
                 'FOO123bar',
-                array_merge($this->arguments, ['letters' => true, 'caseSensitive' => false]),
+                array_merge(self::$arguments, ['letters' => true, 'caseSensitive' => false]),
                 '123'
             ],
-            'remove digits' => ['foo123bar', array_merge($this->arguments, ['digits' => true]), 'foobar'],
-            'remove windows cr' => ["breaks\rbreaks", array_merge($this->arguments, ['windowsBreaks' => true]), 'breaksbreaks'],
-            'remove unix breaks' => ["breaks\nbreaks", array_merge($this->arguments, ['unixBreaks' => true]), 'breaksbreaks'],
-            'remove tabs' => ['tabs	tabs', array_merge($this->arguments, ['tabs' => true]), 'tabstabs'],
-            'remove white space' => [' trim med ', array_merge($this->arguments, ['whitespace' => true]), 'trimmed'],
+            'remove digits' => ['foo123bar', array_merge(self::$arguments, ['digits' => true]), 'foobar'],
+            'remove windows cr' => ["breaks\rbreaks", array_merge(self::$arguments, ['windowsBreaks' => true]), 'breaksbreaks'],
+            'remove unix breaks' => ["breaks\nbreaks", array_merge(self::$arguments, ['unixBreaks' => true]), 'breaksbreaks'],
+            'remove tabs' => ['tabs	tabs', array_merge(self::$arguments, ['tabs' => true]), 'tabstabs'],
+            'remove white space' => [' trim med ', array_merge(self::$arguments, ['whitespace' => true]), 'trimmed'],
             'remove whitespace between html tags' => [
                 ' <p> Foo </p> <p> Bar </p> ',
-                array_merge($this->arguments, ['whitespaceBetweenHtmlTags' => true]),
+                array_merge(self::$arguments, ['whitespaceBetweenHtmlTags' => true]),
                 '<p> Foo </p><p> Bar </p>'
             ],
             'remove characters case sensitive' => [
                 'ABCdef',
-                array_merge($this->arguments, ['characters' => 'abc', 'caseSensitive' => false]),
+                array_merge(self::$arguments, ['characters' => 'abc', 'caseSensitive' => false]),
                 'def'
             ],
-            'remove character' => ['abcdef', array_merge($this->arguments, ['characters' => 'abc']), 'def'],
-            'remove multibyte character' => ['aäæå本bc', array_merge($this->arguments, ['characters' => 'æ本']), 'aäåbc'],
-            'remove array characters' => ['abcdef', array_merge($this->arguments, ['characters' => ['a', 'b', 'c']]), 'def'],
+            'remove character' => ['abcdef', array_merge(self::$arguments, ['characters' => 'abc']), 'def'],
+            'remove multibyte character' => ['aäæå本bc', array_merge(self::$arguments, ['characters' => 'æ本']), 'aäåbc'],
+            'remove array characters' => ['abcdef', array_merge(self::$arguments, ['characters' => ['a', 'b', 'c']]), 'def'],
             'remove string case sensitive' => [
                 'aBcDeFgHijkl',
-                array_merge($this->arguments, ['strings' => 'abc,def,ghi', 'caseSensitive' => false]),
+                array_merge(self::$arguments, ['strings' => 'abc,def,ghi', 'caseSensitive' => false]),
                 'jkl'
             ],
-            'remove strings' => ['abcdefghijkl', array_merge($this->arguments, ['strings' => 'abc,def,ghi']), 'jkl'],
-            'remove string array' => ['abcdefghijkl', array_merge($this->arguments, ['strings' => ['abc', 'def', 'ghi']]), 'jkl'],
+            'remove strings' => ['abcdefghijkl', array_merge(self::$arguments, ['strings' => 'abc,def,ghi']), 'jkl'],
+            'remove string array' => ['abcdefghijkl', array_merge(self::$arguments, ['strings' => ['abc', 'def', 'ghi']]), 'jkl'],
         ];
     }
 
-    /**
-     * @dataProvider renderDataProvider
-     * @test
-     */
+    #[DataProvider('renderDataProvider')]
+    #[Test]
     public function render(string $content, array $arguments, string $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);

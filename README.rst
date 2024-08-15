@@ -1,10 +1,10 @@
+.. image:: https://img.shields.io/badge/TYPO3-13-orange.svg
+   :alt: TYPO3 13
+   :target: https://get.typo3.org/version/13
+
 .. image:: https://img.shields.io/badge/TYPO3-12-orange.svg
    :alt: TYPO3 12
    :target: https://get.typo3.org/version/12
-
-.. image:: https://img.shields.io/badge/TYPO3-11-orange.svg
-   :alt: TYPO3 11
-   :target: https://get.typo3.org/version/11
 
 .. image:: https://github.com/buepro/typo3-pvh/workflows/CI/badge.svg
    :alt: Continuous Integration Status

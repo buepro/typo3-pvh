@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Condition\Variable;
 
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,30 +19,19 @@ class IsNullViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Condition/Fixtures/VariableIsNull.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $arguments = [
+    protected array $arguments = [
         'value' => null,
         'then' => 'then',
         'else' => 'else',
     ];
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function rendersThenChildIfConditionMatched(): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
@@ -54,9 +44,7 @@ class IsNullViewHelperTest extends FunctionalTestCase
         self::assertSame('then', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function rendersThenChildIfConditionNotMatched(): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);

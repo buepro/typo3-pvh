@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Iterator;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,19 +20,13 @@ class MergeViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Iterator/Fixtures/Merge.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    public function renderDataProvider(): array
+    public static function renderDataProvider(): array
     {
         return [
             'numeric keys' => [
@@ -64,10 +60,8 @@ class MergeViewHelperTest extends FunctionalTestCase
         ];
     }
 
-    /**
-     * @dataProvider renderDataProvider
-     * @test
-     */
+    #[DataProvider('renderDataProvider')]
+    #[Test]
     public function render(array $arguments, array $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
@@ -80,9 +74,7 @@ class MergeViewHelperTest extends FunctionalTestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function supportedUsage(): void
     {
         $arguments = [ 'a' => ['fooa', 'bara'], 'b' => ['foob']];

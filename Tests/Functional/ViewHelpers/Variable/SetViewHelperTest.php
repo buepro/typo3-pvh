@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Variable;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,19 +20,13 @@ class SetViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Variable/Fixtures/Set.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    public function renderDataProvider(): array
+    public static function renderDataProvider(): array
     {
         return [
             'can set variable' => [
@@ -56,13 +52,9 @@ class SetViewHelperTest extends FunctionalTestCase
         ];
     }
 
-    /**
-     * @dataProvider renderDataProvider
-     * @test
-     * @param mixed|null $expected
-     * @throws \Exception
-     */
-    public function render(array $variables, array $arguments, $expected): void
+    #[DataProvider('renderDataProvider')]
+    #[Test]
+    public function render(array $variables, array $arguments, array $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
@@ -75,9 +67,7 @@ class SetViewHelperTest extends FunctionalTestCase
         self::assertSame($expected, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function canSetVariableWithValueFromTagContent(): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);

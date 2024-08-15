@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Format;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -18,19 +20,13 @@ class TrimViewHelperTest extends FunctionalTestCase
 {
     private const TEMPLATE_PATH = 'EXT:pvh/Tests/Functional/ViewHelpers/Format/Fixtures/Trim.html';
 
-    /**
-     * @var bool Speed up this test case, it needs no database
-     */
-    protected $initializeDatabase = false;
+    protected bool $initializeDatabase = false;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = [
+    protected array $testExtensionsToLoad = [
         'typo3conf/ext/pvh',
     ];
 
-    public function renderDataProvider(): array
+    public static function renderDataProvider(): array
     {
         return [
             'trim without characters' => ['  trimmed ', null, 'trimmed'],
@@ -39,10 +35,8 @@ class TrimViewHelperTest extends FunctionalTestCase
         ];
     }
 
-    /**
-     * @dataProvider renderDataProvider
-     * @test
-     */
+    #[DataProvider('renderDataProvider')]
+    #[Test]
     public function render(string $content, ?string $characters, string $expected): void
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);

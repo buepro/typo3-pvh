@@ -7,10 +7,10 @@ includes:
 
 parameters:
 	level: max
-	checkMissingIterableValueType: false
 	reportUnmatchedIgnoredErrors: false
 
 	ignoreErrors:
+		- identifier: missingType.iterableValue
 		- "#Construct empty\\(\\) is not allowed. Use more strict comparison\\.#"
 
 	paths:
