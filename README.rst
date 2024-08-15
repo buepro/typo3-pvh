@@ -22,3 +22,12 @@ new TYPO3 LTS releases promptly. It contains copies from the great
 :Repository:  https://github.com/buepro/typo3-pvh
 :Read online: https://docs.typo3.org/p/buepro/typo3-pvh/main/en-us/
 :TER:         https://extensions.typo3.org/extension/pvh
+
+----
+
+**Credits**
+
+This extension can be provided thanks to generous support from partners. A big
+thanks goes to:
+
+-  `PopNet Informatik AG <https://www.popnet.ch/>`__

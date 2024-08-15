@@ -38,6 +38,15 @@ new TYPO3 LTS releases promptly. It contains copies from the great
 
 ----
 
+**Credits**
+
+This extension can be provided thanks to generous support from partners. A big
+thanks goes to:
+
+-  `PopNet Informatik AG <https://www.popnet.ch/>`__
+
+----
+
 **Table of Contents**
 
 .. toctree::
