@@ -77,7 +77,7 @@ class RandomViewHelper extends AbstractViewHelper
         $subject = $arguments['subject'] ?? $renderChildrenClosure();
         $subject = IteratorUtility::arrayFromArrayOrTraversableOrCSV($subject);
         $count = $arguments['count'] > count($subject) ? count($subject) : $arguments['count'];
-        $keys = array_rand($subject, $count);
+        $keys = array_rand($subject, (int)$count);
         $keys = is_array($keys) ? $keys : [$keys];
         $result = array_intersect_key($subject, array_flip($keys));
         if ($arguments['shuffle']) {
