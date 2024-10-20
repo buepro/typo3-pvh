@@ -1,16 +1,68 @@
 <html xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
-<span id="eliminated">{content -> pvh:format.eliminate(
-    caseSensitive: caseSensitive,
-    caseSensitive: caseSensitive,
-    characters: characters,
-    strings: strings,
-    whitespace: whitespace,
-    whitespaceBetweenHtmlTags: whitespaceBetweenHtmlTags,
-    tabs: tabs,
-    unixBreaks: unixBreaks,
-    windowsBreaks: windowsBreaks,
-    digits: digits,
-    letters: letters,
-    nonAscii: nonAscii
-    )}</span>
+<span id="inline-only">
+    {pvh:format.eliminate(
+        content: content,
+        caseSensitive: caseSensitive,
+        caseSensitive: caseSensitive,
+        characters: characters,
+        strings: strings,
+        whitespace: whitespace,
+        whitespaceBetweenHtmlTags: whitespaceBetweenHtmlTags,
+        tabs: tabs,
+        unixBreaks: unixBreaks,
+        windowsBreaks: windowsBreaks,
+        digits: digits,
+        letters: letters,
+        nonAscii: nonAscii
+    )}
+</span>
+<span id="inline-content">
+    {content -> pvh:format.eliminate(
+        caseSensitive: caseSensitive,
+        caseSensitive: caseSensitive,
+        characters: characters,
+        strings: strings,
+        whitespace: whitespace,
+        whitespaceBetweenHtmlTags: whitespaceBetweenHtmlTags,
+        tabs: tabs,
+        unixBreaks: unixBreaks,
+        windowsBreaks: windowsBreaks,
+        digits: digits,
+        letters: letters,
+        nonAscii: nonAscii
+    )}
+</span>
+<span id="tag-only">
+    <pvh:format.eliminate
+        content="{content}"
+        caseSensitive="{caseSensitive}"
+        caseSensitive="{caseSensitive}"
+        characters="{characters}"
+        strings="{strings}"
+        whitespace="{whitespace}"
+        whitespaceBetweenHtmlTags="{whitespaceBetweenHtmlTags}"
+        tabs="{tabs}"
+        unixBreaks="{unixBreaks}"
+        windowsBreaks="{windowsBreaks}"
+        digits="{digits}"
+        letters="{letters}"
+        nonAscii="{nonAscii}"
+    ></pvh:format.eliminate>
+</span>
+<span id="tag-content">
+    <pvh:format.eliminate
+        caseSensitive="{caseSensitive}"
+        caseSensitive="{caseSensitive}"
+        characters="{characters}"
+        strings="{strings}"
+        whitespace="{whitespace}"
+        whitespaceBetweenHtmlTags="{whitespaceBetweenHtmlTags}"
+        tabs="{tabs}"
+        unixBreaks="{unixBreaks}"
+        windowsBreaks="{windowsBreaks}"
+        digits="{digits}"
+        letters="{letters}"
+        nonAscii="{nonAscii}"
+    >{content}</pvh:format.eliminate>
+</span>
 </html>

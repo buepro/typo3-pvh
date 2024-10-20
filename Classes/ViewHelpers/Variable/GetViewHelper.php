@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace Buepro\Pvh\ViewHelpers\Variable;
 
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Copied from EXT:vhs
@@ -58,8 +56,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class GetViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * @return void
      */
@@ -76,15 +72,12 @@ class GetViewHelper extends AbstractViewHelper
     /**
      * @return mixed
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        $variableProvider = $renderingContext->getVariableProvider();
+    public function render()
+    {
+        $variableProvider = $this->renderingContext->getVariableProvider();
         /** @var string $name */
-        $name = $arguments['name'];
-        $useRawKeys = $arguments['useRawKeys'];
+        $name = $this->arguments['name'];
+        $useRawKeys = $this->arguments['useRawKeys'];
         if (false === strpos($name, '.')) {
             if (true === $variableProvider->exists($name)) {
                 return $variableProvider->get($name);

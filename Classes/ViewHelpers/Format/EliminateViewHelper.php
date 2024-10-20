@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\ViewHelpers\Format;
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Copied from EXT:vhs
@@ -24,8 +22,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class EliminateViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     /**
      * Initialize arguments
      *
@@ -81,11 +77,11 @@ class EliminateViewHelper extends AbstractViewHelper
         $this->registerArgument('nonAscii', 'boolean', 'Eliminates any ASCII char', false, false);
     }
 
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
+    /**
+     * @return string
+     */
+    public function render()
+    {
         /**
          * @var array{
          *     content: ?string,
@@ -102,7 +98,11 @@ class EliminateViewHelper extends AbstractViewHelper
          *     nonAscii: bool
          * } $arguments
          */
-        $content = $renderChildrenClosure();
+        $arguments  = $this->arguments;
+        $content = $arguments['content'] ?? $this->renderChildren();
+        if (!is_string($content)) {
+            throw new \InvalidArgumentException('The content must be a string or a string-formatted string', 1729353799);
+        }
         if (true === isset($arguments['characters'])) {
             $content = static::eliminateCharacters(
                 $content,

@@ -3,9 +3,9 @@
   <testsuites>
     <testsuite name="buepro-pvh-functional-tests">
       <directory>../Tests/Functional</directory>
-      <!--            <file>-->
-      <!--                ../Tests/Functional/ViewHelpers/Core/VersionViewHelperTest.php-->
-      <!--            </file>-->
+<!--      <file>-->
+<!--          ../Tests/Functional/ViewHelpers/Variable/GetViewHelperTest.php-->
+<!--      </file>-->
     </testsuite>
   </testsuites>
   <source>

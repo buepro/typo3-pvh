@@ -13,7 +13,8 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Core;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class VersionViewHelperTest extends FunctionalTestCase
@@ -30,8 +31,13 @@ class VersionViewHelperTest extends FunctionalTestCase
     public function render(): void
     {
         $expected = (string)VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getNumericTypo3Version());
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);
         [$node] = $xml->xpath('//span[@id="version"]');

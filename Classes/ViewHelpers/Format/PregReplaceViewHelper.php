@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace Buepro\Pvh\ViewHelpers\Format;
 
 use Buepro\Pvh\Traits\TemplateVariableViewHelperTrait;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Based on EXT:vhs
@@ -24,7 +22,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class PregReplaceViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
     use TemplateVariableViewHelperTrait;
 
     public function initializeArguments(): void
@@ -38,14 +35,15 @@ class PregReplaceViewHelper extends AbstractViewHelper
     /**
      * @return mixed|string
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public function render()
+    {
         /** @var array{subject: ?string, pattern: string, replacement: string} $arguments */
-        $subject = $arguments['subject'] ?? $renderChildrenClosure() ?? '';
+        $arguments = $this->arguments;
+        $subject = $arguments['subject'] ?? $this->renderChildren() ?? '';
+        if (!is_string($subject)) {
+            throw new \InvalidArgumentException('The subject must be a string or a string-formatted string', 1729353609);
+        }
         $result = preg_replace($arguments['pattern'], $arguments['replacement'], $subject);
-        return static::finalizeRenderStaticWithAsArgument($arguments, $renderingContext, $result);
+        return static::finalizeRenderStaticWithAsArgument($arguments, $this->renderingContext, $result);
     }
 }

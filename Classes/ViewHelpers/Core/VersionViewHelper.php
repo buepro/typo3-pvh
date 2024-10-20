@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace Buepro\Pvh\ViewHelpers\Core;
 
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * To get the TYPO3 version. Usage:
@@ -22,8 +20,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class VersionViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     /**
      * @return void
      */
@@ -36,15 +32,16 @@ class VersionViewHelper extends AbstractViewHelper
         );
     }
 
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
+    /**
+     * @return string
+     */
+    public function render(): string
+    {
         /** @var array{as: ?string} $arguments */
+        $arguments = $this->arguments;
         $result = VersionNumberUtility::convertVersionNumberToInteger(VersionNumberUtility::getNumericTypo3Version());
         if (!empty($arguments['as'])) {
-            $variableProvider = $renderingContext->getVariableProvider();
+            $variableProvider = $this->renderingContext->getVariableProvider();
             $variableProvider->add($arguments['as'], $result);
             return '';
         }

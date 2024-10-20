@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\ViewHelpers\Format;
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Copied from EXT:vhs
@@ -21,8 +19,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class ReplaceViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     public function initializeArguments(): void
     {
         $this->registerArgument('content', 'string', 'Content in which to perform replacement');
@@ -32,13 +28,17 @@ class ReplaceViewHelper extends AbstractViewHelper
         $this->registerArgument('caseSensitive', 'boolean', 'If true, perform case-sensitive replacement', false, true);
     }
 
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
+    /**
+     * @return string
+     */
+    public function render()
+    {
         /** @var array{content: ?string, substring: string, replacement: string, count: ?int, caseSensitive: bool} $arguments */
-        $content = $renderChildrenClosure();
+        $arguments = $this->arguments;
+        $content = $arguments['content'] ?? $this->renderChildren();
+        if (!is_string($content)) {
+            throw new \InvalidArgumentException('The content must be a string or a string-formatted string', 1729353423);
+        }
         $substring = $arguments['substring'];
         $replacement = $arguments['replacement'];
         $caseSensitive = $arguments['caseSensitive'];

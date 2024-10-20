@@ -13,7 +13,8 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class MergeViewHelperTest extends FunctionalTestCase
@@ -64,8 +65,13 @@ class MergeViewHelperTest extends FunctionalTestCase
     #[Test]
     public function render(array $arguments, array $expected): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple($arguments);
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);
@@ -79,8 +85,13 @@ class MergeViewHelperTest extends FunctionalTestCase
     {
         $arguments = [ 'a' => ['fooa', 'bara'], 'b' => ['foob']];
         $expected = ['foob', 'bara'];
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple($arguments);
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);

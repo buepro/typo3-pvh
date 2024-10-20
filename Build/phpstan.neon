@@ -4,6 +4,7 @@ includes:
 - %currentWorkingDirectory%/.build/vendor/phpstan/phpstan-deprecation-rules/rules.neon
 - %currentWorkingDirectory%/.build/vendor/friendsoftypo3/phpstan-typo3/extension.neon
 - %currentWorkingDirectory%/Build/phpstan-baseline.neon
+- %currentWorkingDirectory%/Build/phpstan-baseline-github.neon
 
 parameters:
 	level: max

@@ -13,7 +13,8 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Format;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class TrimViewHelperTest extends FunctionalTestCase
@@ -39,8 +40,13 @@ class TrimViewHelperTest extends FunctionalTestCase
     #[Test]
     public function render(string $content, ?string $characters, string $expected): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assign('content', $content);
         if ($characters !== null) {
             $view->assign('characters', $characters);

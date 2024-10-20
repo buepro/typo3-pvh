@@ -13,7 +13,9 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Iterator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Core\View\ViewInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class RandomViewHelperTest extends FunctionalTestCase
@@ -37,10 +39,15 @@ class RandomViewHelperTest extends FunctionalTestCase
         'as' => 'as',
     ];
 
-    private function getView(array $subject, array $arguments): StandaloneView
+    private function getView(array $subject, array $arguments): ViewInterface
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assign('subject', $subject);
         $view->assignMultiple($arguments);
         return $view;

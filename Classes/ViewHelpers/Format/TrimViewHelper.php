@@ -10,9 +10,7 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\ViewHelpers\Format;
 
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Copied from EXT:vhs
@@ -22,8 +20,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class TrimViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     /**
      * @return void
      */
@@ -35,14 +31,17 @@ class TrimViewHelper extends AbstractViewHelper
 
     /**
      * Trims content by stripping off $characters
+     *
+     * @return string
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
-        /** @var array{characters: ?string} $arguments */
-        $content = $renderChildrenClosure();
+    public function render()
+    {
+        /** @var array{content: ?string, characters: ?string} $arguments */
+        $arguments = $this->arguments;
+        $content = $arguments['content'] ?? $this->renderChildren();
+        if (!is_string($content)) {
+            throw new \InvalidArgumentException('The content must be a string or a string-formatted string', 1729353296);
+        }
         if (!empty($arguments['characters'])) {
             $content = trim($content, $arguments['characters']);
         } else {

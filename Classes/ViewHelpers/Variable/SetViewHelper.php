@@ -11,9 +11,7 @@ declare(strict_types=1);
 namespace Buepro\Pvh\ViewHelpers\Variable;
 
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
  * Copied from EXT:vhs
@@ -61,8 +59,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderS
  */
 class SetViewHelper extends AbstractViewHelper
 {
-    use CompileWithContentArgumentAndRenderStatic;
-
     /**
      * @var bool
      */
@@ -74,21 +70,19 @@ class SetViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         $this->registerArgument('value', 'mixed', 'Value to set');
-        $this->registerArgument('name', 'string', 'Name of variable to assign');
+        $this->registerArgument('name', 'string', 'Name of variable to assign', true);
     }
 
     /**
      * @return mixed
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public function render()
+    {
         /** @var string $name */
-        $name = $arguments['name'];
-        $value = $renderChildrenClosure();
-        $variableProvider = $renderingContext->getVariableProvider();
+        $name = $this->arguments['name'];
+        /** @var ?mixed $value */
+        $value = $this->arguments['value'] ?? $this->renderChildren();
+        $variableProvider = $this->renderingContext->getVariableProvider();
         if (false === strpos($name, '.')) {
             if (true === $variableProvider->exists($name)) {
                 $variableProvider->remove($name);

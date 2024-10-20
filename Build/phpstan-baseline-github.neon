@@ -1,0 +1,10 @@
+parameters:
+	ignoreErrors:
+		-
+			message: """
+				#^Parameter \\#1 \\$subject of static method TYPO3\\\\CMS\\\\Extbase\\\\Reflection\\\\ObjectAccess\\:\\:getPropertyPath\\(\\) expects array\\|object, mixed given.$#
+			"""
+		-
+			message: """
+				#^Parameter \\#1 \\$subject of static method TYPO3\\\\CMS\\\\Extbase\\\\Reflection\\\\ObjectAccess\\:\\:getProperty\\(\\) expects array\\|object, mixed given.$#
+			"""

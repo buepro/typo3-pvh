@@ -13,8 +13,9 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Variable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class GetViewHelperTest extends FunctionalTestCase
@@ -51,7 +52,7 @@ class GetViewHelperTest extends FunctionalTestCase
             'return nested value using raw keys if root exists' => [
                 [
                     'name' => 'test.test',
-                    'useRawKeys => true',
+                    'useRawKeys' => true,
                     'test' => ['test' => 1],
                 ],
                 1
@@ -59,7 +60,7 @@ class GetViewHelperTest extends FunctionalTestCase
             'return nested value if root exists and members are numeric' => [
                 [
                     'name' => 'test.1',
-                    'useRawKeys => true',
+                    'useRawKeys' => true,
                     'test' => [1, 2],
                 ],
                 2
@@ -85,8 +86,13 @@ class GetViewHelperTest extends FunctionalTestCase
     #[Test]
     public function render(array $arguments, ?int $expected): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple($arguments);
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);

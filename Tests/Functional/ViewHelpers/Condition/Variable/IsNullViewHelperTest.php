@@ -12,7 +12,8 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Condition\Variable;
 
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class IsNullViewHelperTest extends FunctionalTestCase
@@ -34,8 +35,13 @@ class IsNullViewHelperTest extends FunctionalTestCase
     #[Test]
     public function rendersThenChildIfConditionMatched(): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple($this->arguments);
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);
@@ -47,8 +53,13 @@ class IsNullViewHelperTest extends FunctionalTestCase
     #[Test]
     public function rendersThenChildIfConditionNotMatched(): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple(array_replace($this->arguments, ['value' => 'bur']));
         $html = $view->render();
         $xml = new \SimpleXMLElement($html);

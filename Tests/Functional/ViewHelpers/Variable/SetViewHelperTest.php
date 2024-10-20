@@ -13,7 +13,8 @@ namespace Buepro\Pvh\Tests\Functional\ViewHelpers\Variable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class SetViewHelperTest extends FunctionalTestCase
@@ -56,8 +57,13 @@ class SetViewHelperTest extends FunctionalTestCase
     #[Test]
     public function render(array $variables, array $arguments, array $expected): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple($variables);
         $view->assignMultiple($arguments);
         $html = $view->render();
@@ -70,8 +76,13 @@ class SetViewHelperTest extends FunctionalTestCase
     #[Test]
     public function canSetVariableWithValueFromTagContent(): void
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(self::TEMPLATE_PATH);
+        $view = (GeneralUtility::makeInstance(ViewFactoryInterface::class))
+            ->create(new ViewFactoryData(
+                null,
+                null,
+                null,
+                self::TEMPLATE_PATH
+            ));
         $view->assignMultiple([
             'testTagContent' => true,
             'name' => 'testTagContent',

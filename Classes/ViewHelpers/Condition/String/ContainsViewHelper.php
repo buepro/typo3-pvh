@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Buepro\Pvh\ViewHelpers\Condition\String;
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
@@ -33,7 +34,7 @@ class ContainsViewHelper extends AbstractConditionViewHelper
      * @param ?array $arguments
      * @return bool
      */
-    protected static function evaluateCondition($arguments = null)
+    public static function verdict($arguments, RenderingContextInterface $renderingContext)
     {
         return is_array($arguments) && false !== strpos((string) $arguments['haystack'], (string) $arguments['needle']);
     }

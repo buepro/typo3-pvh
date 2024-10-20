@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Buepro\Pvh\ViewHelpers\Iterator;
 
 use Buepro\Pvh\Utility\IteratorUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -68,25 +67,23 @@ class RandomViewHelper extends AbstractViewHelper
     /**
      * @return array|string
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        /** @var array{subject: mixed, count: int, shuffle: bool, as: string} $arguments */
-        $subject = $arguments['subject'] ?? $renderChildrenClosure();
+    public function render()
+    {
+        /** @var array{subject: null|string|int, count: string|int, shuffle: string|bool, as: string} $arguments */
+        $arguments = $this->arguments;
+        $subject = $arguments['subject'] ?? $this->renderChildren();
         $subject = IteratorUtility::arrayFromArrayOrTraversableOrCSV($subject);
-        $count = $arguments['count'] > count($subject) ? count($subject) : $arguments['count'];
-        $keys = array_rand($subject, (int)$count);
+        $count = min((int)$arguments['count'], count($subject));
+        $keys = array_rand($subject, $count);
         $keys = is_array($keys) ? $keys : [$keys];
         $result = array_intersect_key($subject, array_flip($keys));
-        if ($arguments['shuffle']) {
+        if ((bool)$arguments['shuffle']) {
             if (!shuffle($result)) {
                 $result = array_intersect_key($subject, $keys);
             }
         }
         if (!empty($arguments['as'])) {
-            $variableProvider = $renderingContext->getVariableProvider();
+            $variableProvider = $this->renderingContext->getVariableProvider();
             $variableProvider->add($arguments['as'], $result);
             return '';
         }

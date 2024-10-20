@@ -1,8 +1,25 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:pvh="http://typo3.org/ns/Buepro/Pvh/ViewHelpers">
-<span id="replaced">{content -> pvh:format.replace(
+<span id="inline-only">{pvh:format.replace(
+    content: content,
     substring: substring,
     replacement: replacement,
     caseSensitive: caseSensitive
 )}</span>
+<span id="inline-content">{content -> pvh:format.replace(
+    substring: substring,
+    replacement: replacement,
+    caseSensitive: caseSensitive
+)}</span>
+<span id="tag-only"><pvh:format.replace
+    content="{content}"
+    substring="{substring}"
+    replacement="{replacement}"
+    caseSensitive="{caseSensitive}"
+></pvh:format.replace></span>
+<span id="tag-content"><pvh:format.replace
+    substring="{substring}"
+    replacement="{replacement}"
+    caseSensitive="{caseSensitive}"
+>{content}</pvh:format.replace></span>
 </html>

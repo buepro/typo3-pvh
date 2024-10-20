@@ -12,7 +12,6 @@ namespace Buepro\Pvh\ViewHelpers\Iterator;
 
 use Buepro\Pvh\Utility\IteratorUtility;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -60,17 +59,18 @@ class MergeViewHelper extends AbstractViewHelper
     /**
      * @return array|mixed|string
      */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public function render()
+    {
         /** @var array{a: mixed, b: mixed, useKeys: bool, as: string} $arguments */
-        $a = IteratorUtility::arrayFromArrayOrTraversableOrCSV($arguments['a'] ?? $renderChildrenClosure(), $arguments['useKeys']);
+        $arguments = $this->arguments;
+        $a = IteratorUtility::arrayFromArrayOrTraversableOrCSV(
+            $arguments['a'] ?? $this->renderChildren(),
+            $arguments['useKeys']
+        );
         $b = IteratorUtility::arrayFromArrayOrTraversableOrCSV($arguments['b'], $arguments['useKeys']);
         ArrayUtility::mergeRecursiveWithOverrule($a, $b);
         if (!empty($arguments['as'])) {
-            $variableProvider = $renderingContext->getVariableProvider();
+            $variableProvider = $this->renderingContext->getVariableProvider();
             $variableProvider->add($arguments['as'], $a);
             return '';
         }
