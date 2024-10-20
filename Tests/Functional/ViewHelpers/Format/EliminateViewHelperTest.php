@@ -34,7 +34,7 @@ class EliminateViewHelperTest extends FunctionalTestCase
         'windowsBreaks' => false,
         'digits' => false,
         'letters' => false,
-        'nonAscii' => false
+        'nonAscii' => false,
     ];
 
     protected array $testExtensionsToLoad = [
@@ -49,7 +49,7 @@ class EliminateViewHelperTest extends FunctionalTestCase
             'remove letters case sensitive' => [
                 'FOO123bar',
                 array_merge(self::$arguments, ['letters' => true, 'caseSensitive' => false]),
-                '123'
+                '123',
             ],
             'remove digits' => ['foo123bar', array_merge(self::$arguments, ['digits' => true]), 'foobar'],
             'remove windows cr' => ["breaks\rbreaks", array_merge(self::$arguments, ['windowsBreaks' => true]), 'breaksbreaks'],
@@ -59,12 +59,12 @@ class EliminateViewHelperTest extends FunctionalTestCase
             'remove whitespace between html tags' => [
                 ' <p> Foo </p> <p> Bar </p> ',
                 array_merge(self::$arguments, ['whitespaceBetweenHtmlTags' => true]),
-                '<p> Foo </p><p> Bar </p>'
+                '<p> Foo </p><p> Bar </p>',
             ],
             'remove characters case sensitive' => [
                 'ABCdef',
                 array_merge(self::$arguments, ['characters' => 'abc', 'caseSensitive' => false]),
-                'def'
+                'def',
             ],
             'remove character' => ['abcdef', array_merge(self::$arguments, ['characters' => 'abc']), 'def'],
             'remove multibyte character' => ['aäæå本bc', array_merge(self::$arguments, ['characters' => 'æ本']), 'aäåbc'],
@@ -72,7 +72,7 @@ class EliminateViewHelperTest extends FunctionalTestCase
             'remove string case sensitive' => [
                 'aBcDeFgHijkl',
                 array_merge(self::$arguments, ['strings' => 'abc,def,ghi', 'caseSensitive' => false]),
-                'jkl'
+                'jkl',
             ],
             'remove strings' => ['abcdefghijkl', array_merge(self::$arguments, ['strings' => 'abc,def,ghi']), 'jkl'],
             'remove string array' => ['abcdefghijkl', array_merge(self::$arguments, ['strings' => ['abc', 'def', 'ghi']]), 'jkl'],

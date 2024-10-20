@@ -34,7 +34,7 @@
 		"phpstan/phpstan-strict-rules": "^1.4.3",
 		"roave/security-advisories": "dev-latest",
 		"typo3/cms-base-distribution": "^12.4 || ^13.4",
-		"typo3/cms-core": "^12.4",
+		"typo3/cms-core": "^13.4",
 		"typo3/cms-lowlevel": "^12.4 || ^13.4",
 		"typo3/cms-recycler": "^12.4 || ^13.4",
 		"typo3/testing-framework": "^8.0"

@@ -40,14 +40,14 @@ class GetViewHelperTest extends FunctionalTestCase
                     'name' => 'test',
                     'test' => 1,
                 ],
-                1
+                1,
             ],
             'return nested value if root exists' => [
                 [
                     'name' => 'test.test',
                     'test' => ['test' => 1],
                 ],
-                1
+                1,
             ],
             'return nested value using raw keys if root exists' => [
                 [
@@ -55,7 +55,7 @@ class GetViewHelperTest extends FunctionalTestCase
                     'useRawKeys' => true,
                     'test' => ['test' => 1],
                 ],
-                1
+                1,
             ],
             'return nested value if root exists and members are numeric' => [
                 [
@@ -63,22 +63,22 @@ class GetViewHelperTest extends FunctionalTestCase
                     'useRawKeys' => true,
                     'test' => [1, 2],
                 ],
-                2
+                2,
             ],
             'return null and suppress exception on invalid property getting' => [
                 [
                     'name' => 'test.void',
                     'test' => new \stdClass,
                 ],
-                null
+                null,
             ],
             'return null and suppress exception on non existing object storage property' => [
                 [
                     'name' => 'storage.15',
                     'storage' => new ObjectStorage(),
                 ],
-                null
-            ]
+                null,
+            ],
         ];
     }
 

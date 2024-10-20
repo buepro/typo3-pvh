@@ -26,7 +26,7 @@ class ReplaceViewHelperTest extends FunctionalTestCase
     protected static array $arguments = [
         'substring' => '',
         'replacement' => '',
-        'caseSensitive' => true
+        'caseSensitive' => true,
     ];
 
     protected array $testExtensionsToLoad = [
@@ -39,12 +39,12 @@ class ReplaceViewHelperTest extends FunctionalTestCase
             'replace all' => [
                 'foobarfoobarFOoBaR',
                 array_merge(self::$arguments, ['substring' => 'foo', 'replacement' => 'lu']),
-                'lubarlubarFOoBaR'
+                'lubarlubarFOoBaR',
             ],
             'replace not case sensitive' => [
                 'foobarfoobarFOoBaR',
                 array_merge(self::$arguments, ['substring' => 'foo', 'replacement' => 'lu', 'caseSensitive' => false]),
-                'lubarlubarluBaR'
+                'lubarlubarluBaR',
             ],
         ];
     }

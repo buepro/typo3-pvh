@@ -22,7 +22,7 @@ $EM_CONF[$_EXTKEY] = [
     ],
     'autoload' => [
         'psr-4' => [
-            'Buepro\\Pvh\\' => 'Classes/'
+            'Buepro\\Pvh\\' => 'Classes/',
         ],
     ],
 ];
