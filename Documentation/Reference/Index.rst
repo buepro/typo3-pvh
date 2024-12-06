@@ -177,9 +177,9 @@ Usage examples
 
 ::
 
-   {pp:iterator.random(subject: someArray, count: 3, as: 'randoms')}
-   {someArray -> pp:iterator.random(count: 3, as: 'randoms')}
-   {pp:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}
+   {pvh:iterator.random(subject: someArray, count: 3, as: 'randoms')}
+   {someArray -> pvh:iterator.random(count: 3, as: 'randoms')}
+   {pvh:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}
 
 Variable
 ========
