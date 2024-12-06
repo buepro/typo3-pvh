@@ -181,6 +181,24 @@ Usage examples
    {someArray -> pvh:iterator.random(count: 3, as: 'randoms')}
    {pvh:iterator.random(subject: someArray, count: 3) -> f:variable(name: 'randoms')}
 
+Transform
+=========
+
+Flexform
+--------
+
+Description
+~~~~~~~~~~~
+
+Transforms flexform data to an array.
+
+Usage examples
+~~~~~~~~~~~~~~
+
+::
+
+   {pvh:transform.flexform(data: pi_flexform, as: 'pi_flexform_transformed')}
+
 Variable
 ========
 
