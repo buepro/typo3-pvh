@@ -14,6 +14,11 @@
 TYPO3 extension ``pvh``
 =======================
 
+    **MAINTAINER WANTED**
+
+    Unfortunately I am missing the time to further care this package.
+    Please get in touch to take over.
+
 This extension provides view helpers for the extension
 `pizpalue <https://github.com/buepro/typo3-pizpalue>`__ hence aims to support
 new TYPO3 LTS releases promptly. It contains copies from the great
